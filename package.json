@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "uuid": "^3.4.0",
+    "vee-validate": "^3.4.8",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuetify": "^2.4.0",
@@ -46,7 +48,10 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "indent": ["error", 2]
+      "indent": [
+        "error",
+        2
+      ]
     }
   },
   "browserslist": [

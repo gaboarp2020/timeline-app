@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <timeline-element-form />
 </template>
 
 <script>
-import HelloWorld from "../components/HelloWorld";
+import TimelineElementForm from "../components/TimelineElementForm.vue";
 
 export default {
   name: "Home",
 
   components: {
-    HelloWorld,
+    TimelineElementForm,
   },
 };
 </script>

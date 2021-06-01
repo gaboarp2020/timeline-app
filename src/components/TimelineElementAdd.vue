@@ -1,8 +1,13 @@
 <template>
-  <v-expansion-panels v-model="activeItemsInPanel">
+  <v-expansion-panels
+    v-model="activeItemsInPanel"
+    :style="{ maxWidth: '900px', margin: 'auto' }"
+  >
     <v-expansion-panel>
       <v-expansion-panel-header>
-        Item
+        <span class="text-h6 font-weight-light">
+          Add a new Timeline Element
+        </span>
         <template v-slot:actions>
           <v-btn color="white" class="text--primary" fab small>
             <v-icon v-show="!panelIsActive">mdi-plus</v-icon>

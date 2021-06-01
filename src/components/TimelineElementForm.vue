@@ -1,40 +1,75 @@
 <template>
   <validation-observer ref="observer" v-slot="{ invalid }">
     <form @submit.prevent="submit">
-      <v-select
-        v-model="newElement.year"
-        :items="years"
-        label="Year"
-      ></v-select>
-      <validation-provider
-        v-slot="{ errors }"
-        name="Title"
-        rules="required|max:32|min:4"
-      >
-        <v-text-field
-          v-model="newElement.title"
-          :counter="32"
-          :error-messages="errors"
-          label="Title"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="Description"
-        rules="required|max:225|min:6"
-      >
-        <v-textarea
-          v-model="newElement.description"
-          :counter="225"
-          :error-messages="errors"
-          label="Description"
-          required
-        ></v-textarea>
-      </validation-provider>
+      <v-card max-width="700" style="margin: 4rem auto">
+        <v-card-text class="d-flex flex-column" style="padding: 2rem">
+          <validation-provider v-slot="{ errors }" name="Year" rules="required">
+            <v-select
+              v-model="newElement.year"
+              :items="years"
+              :error-messages="errors"
+              label="Year"
+              required
+            ></v-select>
+          </validation-provider>
 
-      <v-btn class="mr-4" type="submit" :disabled="invalid"> submit </v-btn>
-      <v-btn @click="clear"> clear </v-btn>
+          <validation-provider
+            v-slot="{ errors }"
+            name="Title"
+            rules="required|max:32|min:4"
+            :bails="false"
+          >
+            <v-text-field
+              v-model="newElement.title"
+              :counter="32"
+              :error-messages="errors"
+              label="Title"
+              required
+            ></v-text-field>
+          </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            name="Description"
+            rules="required|max:225|min:6"
+          >
+            <v-textarea
+              v-model="newElement.description"
+              :counter="225"
+              :error-messages="errors"
+              label="Description"
+              required
+            ></v-textarea>
+          </validation-provider>
+
+          <span
+            class="timeline-element-form__label--grey"
+            style="margin: 20px 0"
+            >Color</span
+          >
+          <div class="d-flex justify-center">
+            <v-color-picker
+              v-model="newElement.color"
+              dot-size="25"
+              elevation="2"
+              mode="hexa"
+              swatches-max-height="200"
+            ></v-color-picker>
+          </div>
+        </v-card-text>
+        <v-card-actions class="d-flex justify-end" style="padding: 24px">
+          <v-btn
+            class="mr-4"
+            color="primary"
+            large
+            type="submit"
+            :disabled="invalid"
+            :loading="isLoading"
+          >
+            submit
+          </v-btn>
+          <v-btn @click="clear" elevation="2" medium> clear </v-btn>
+        </v-card-actions>
+      </v-card>
     </form>
   </validation-observer>
 </template>
@@ -82,46 +117,55 @@ export default {
     },
   },
   data: () => ({
+    isLoading: false,
     newElement: {
       id: "",
       year: "",
       title: "",
       description: "",
+      color: "#70E4E4",
     },
   }),
 
   methods: {
-    ...mapActions({
-      addElement: "addElementAction",
-      incrementUnseenNotifitacionsCount:
-        "incrementUnseenNotifitacionsCountActions",
-    }),
     submit() {
-      const isValid = this.$refs.observer.validate();
+      const isInvalid = !this.$refs.observer.validate();
 
-      if (!isValid) {
+      if (isInvalid) {
         return;
       }
+
+      this.isLoading = true;
 
       if (this.props && this.props.element) {
         //TODO: Update Element logic
         return;
       }
+
       try {
         this.newElement.id = uuidv4();
-        this.addElement(this.newElement);
-        this.clear();
+        const payload = { ...this.newElement };
+        this.addElement(payload);
         //TODO: Notifications logic
       } catch (error) {
         console.log(error);
+      } finally {
+        this.isLoading = false;
+        this.clear();
       }
     },
     clear() {
       this.newElement.year = "";
       this.newElement.title = "";
       this.newElement.description = "";
+      this.newElement.color = "#70E4E4";
       this.$refs.observer.reset();
     },
+    ...mapActions({
+      addElement: "addElementAction",
+      incrementUnseenNotifitacionsCount:
+        "incrementUnseenNotifitacionsCountActions",
+    }),
   },
   computed: {
     years: () => {
@@ -136,4 +180,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.timeline-element-form__label--grey {
+  color: rgba(0, 0, 0, 0.6);
+}
+</style>

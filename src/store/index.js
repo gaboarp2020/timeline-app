@@ -37,6 +37,14 @@ export default new Vuex.Store({
     ADD_ELEMENT: (state, element) => {
       state.elements = [...state.elements, element];
     },
+    UPDATE_ELEMENT: (state, elementToUpdate) => {
+      const key = state.elements.findIndex(
+        (element) => element.id === elementToUpdate.id
+      );
+      state.elements.splice(key, 1);
+      console.log(state.elements);
+      state.elements = [...state.elements, elementToUpdate];
+    },
     incrementUnseenNotifitacionsCount: (state) => {
       state.unseenNotifitacionsCount++;
     },
@@ -48,6 +56,9 @@ export default new Vuex.Store({
     addElementAction: ({ commit }, element) => {
       commit("ADD_ELEMENT", element);
     },
+    updateElementAction: ({ commit }, element) => {
+      commit("UPDATE_ELEMENT", element);
+    },
     incrementUnseenNotifitacionsCountAction: ({ commit }) => {
       commit("incrementUnseenNotifitacionsCount");
     },
@@ -56,9 +67,6 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    //   getElementById: state => (id) => {
-    //     return state.todos.find(todo => todo.id === id)
-    //   }
     getOrderedElementByYear: (state) => {
       return state.elements.sort((a, b) => b.year - a.year);
     },

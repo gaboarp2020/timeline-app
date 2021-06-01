@@ -40,6 +40,7 @@
 </template>
 
 <script>
+// @ts-nocheck
 import generateArrayOfYears from "../components/utils/generateArrayOfYears";
 
 import { v4 as uuidv4 } from "uuid";

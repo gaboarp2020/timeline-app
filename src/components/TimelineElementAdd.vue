@@ -16,14 +16,16 @@
         </template>
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-        <timeline-element-form />
+        <div style="margin: 4rem auto">
+          <timeline-element-form />
+        </div>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
 </template>
 
 <script>
-import TimelineElementForm from "../components/TimelineElementForm.vue";
+import TimelineElementForm from "./TimelineElementForm.vue";
 
 export default {
   components: { TimelineElementForm },

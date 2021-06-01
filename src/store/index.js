@@ -5,13 +5,37 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    elements: [],
+    elements: [
+      {
+        color: "#00CDFFFF",
+        description:
+          "Esta es una prueba dude, quieras o no todo depende de esto.",
+        id: "987c332c-712e-47d4-b64f-de9f9dac10a9",
+        title: "Hola",
+        year: 2015,
+      },
+      {
+        color: "#CD12EEFF",
+        description:
+          "Y esta otra prueba más interesante! A que si? Pues no tengo mas nada que decir.",
+        id: "f3952c73-cbda-459b-8dd0-0e8992b78ced",
+        title: "Que hace?",
+        year: 2010,
+      },
+      {
+        color: "#0FE66DFF",
+        description: "Viva el verde!!",
+        id: "4e0c4b46-4447-48ca-befa-696d4ff2dae3",
+        title: "Verde",
+        year: 2003,
+      },
+    ],
     notifitacions: [],
     unseenNotifitacionsCount: 0,
   },
   mutations: {
-    addElement: (state, element) => {
-      state.elements.push(element);
+    ADD_ELEMENT: (state, element) => {
+      state.elements = [...state.elements, element];
     },
     incrementUnseenNotifitacionsCount: (state) => {
       state.unseenNotifitacionsCount++;
@@ -21,8 +45,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    addElementAction: ({ commit }, payload) => {
-      commit("addElement", payload);
+    addElementAction: ({ commit }, element) => {
+      commit("ADD_ELEMENT", element);
     },
     incrementUnseenNotifitacionsCountAction: ({ commit }) => {
       commit("incrementUnseenNotifitacionsCount");
@@ -31,9 +55,12 @@ export default new Vuex.Store({
       commit("resetUnseenNotifitacionsCount");
     },
   },
-  // getters: {
-  //   getElementById: (state) => (id) => {
-  //     return state.todos.find(todo => todo.id === id)
-  //   }
-  // },
+  getters: {
+    //   getElementById: state => (id) => {
+    //     return state.todos.find(todo => todo.id === id)
+    //   }
+    getOrderedElementByYear: (state) => {
+      return state.elements.sort((a, b) => b.year - a.year);
+    },
+  },
 });

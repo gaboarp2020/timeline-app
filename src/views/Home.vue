@@ -1,15 +1,15 @@
 <template>
-  <timeline-element-form />
+  <timeline-element-add />
 </template>
 
 <script>
-import TimelineElementForm from "../components/TimelineElementForm.vue";
+import TimelineElementAdd from "../components/TimelineElementAdd.vue";
 
 export default {
   name: "Home",
 
   components: {
-    TimelineElementForm,
+    TimelineElementAdd,
   },
 };
 </script>

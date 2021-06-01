@@ -9,7 +9,7 @@
       <validation-provider
         v-slot="{ errors }"
         name="Title"
-        rules="required|max:32|min:6"
+        rules="required|max:32|min:4"
       >
         <v-text-field
           v-model="newElement.title"
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+// @ts-nocheck
 import generateArrayOfYears from "../components/utils/generateArrayOfYears";
 
 import { v4 as uuidv4 } from "uuid";
@@ -103,13 +104,14 @@ export default {
       }
 
       if (this.props && this.props.element) {
-        //TODO: update element logic
+        //TODO: Update Element logic
         return;
       }
       try {
         this.newElement.id = uuidv4();
-        console.log(this.newElement);
         this.addElement(this.newElement);
+        this.clear();
+        //TODO: Notifications logic
       } catch (error) {
         console.log(error);
       }

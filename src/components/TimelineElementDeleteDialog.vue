@@ -71,6 +71,10 @@ export default {
       );
 
       this.alert = true;
+
+      setTimeout(() => {
+        this.alert = false;
+      }, 3000);
     },
 
     ...mapActions(["deleteElementAction"]),

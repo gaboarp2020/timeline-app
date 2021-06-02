@@ -79,28 +79,23 @@
       </form>
     </validation-observer>
 
-    <v-dialog v-model="dialog" max-width="290">
-      <v-card>
-        <v-card-title class="text-h5"> Update </v-card-title>
-
-        <v-card-text> Are you sure to update this element? </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn color="green darken-1" text @click="update"> Yes </v-btn>
-          <v-btn color="green darken-1" text @click="dialog = false">
-            No
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <base-dialog
+      v-if="dialog"
+      title="Update"
+      text="Are you sure to update this element?"
+      :openDialog="dialog"
+      @callback="update"
+      @close="closeDialog"
+    >
+    </base-dialog>
   </div>
 </template>
 
 <script>
 // @ts-nocheck
+import BaseDialog from "./BaseDialog.vue";
 import generateArrayOfYears from "./utils/generateArrayOfYears";
+import sendPayload from "./utils/sendPayload";
 
 import { v4 as uuidv4 } from "uuid";
 import { required, max, min } from "vee-validate/dist/rules";
@@ -131,6 +126,7 @@ extend("min", {
 
 export default {
   components: {
+    BaseDialog,
     ValidationProvider,
     ValidationObserver,
   },
@@ -163,16 +159,11 @@ export default {
       this.newElement.color = "#70E4E4";
       this.$refs.observer.reset();
     },
-    sendPayload(callback, payload) {
-      this.isLoading = true;
-      try {
-        callback(payload);
-        //TODO: Notifications logic
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.isLoading = false;
-      }
+    closeDialog() {
+      this.dialog = false;
+    },
+    openDialog() {
+      this.dialog = true;
     },
     submit() {
       const isInvalid = !this.$refs.observer.validate();
@@ -182,7 +173,7 @@ export default {
       }
 
       if (this.isUpdate) {
-        this.dialog = true;
+        this.openDialog();
 
         return;
       }
@@ -190,14 +181,23 @@ export default {
       this.newElement.id = uuidv4();
       const payload = { ...this.newElement };
 
-      this.sendPayload(this.addElement, payload);
+      sendPayload(this.addElement, this, payload);
 
       this.clear();
     },
     update() {
-      const payload = { ...this.newElement };
-      this.sendPayload(this.updateElement, payload);
-      this.$emit("close");
+      if (this.isUpdate) {
+        const elementsAreEquals =
+          JSON.stringify(this.elementToUpdate) ===
+          JSON.stringify(this.newElement);
+
+        if (!elementsAreEquals) {
+          const payload = { ...this.newElement };
+          sendPayload(this.updateElement, this, payload);
+        }
+
+        this.$emit("close");
+      }
     },
     ...mapActions({
       addElement: "addElementAction",
@@ -218,7 +218,7 @@ export default {
   },
   created() {
     if (this.elementToUpdate) {
-      this.newElement = this.elementToUpdate;
+      this.newElement = { ...this.elementToUpdate };
       this.isUpdate = true;
     }
   },

@@ -6,7 +6,11 @@
       max-width="600px"
       @click:outside="closeDialog"
     >
-      <timeline-element-form :element="elementToUpdate" @close="closeDialog">
+      <timeline-element-form
+        v-if="dialog"
+        :element="elementToUpdate"
+        @close="closeDialog"
+      >
         <v-btn color="blue darken-1" text @click="closeDialog"> Close </v-btn>
       </timeline-element-form>
     </v-dialog>

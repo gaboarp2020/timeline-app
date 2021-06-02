@@ -42,7 +42,9 @@
                   >{{ element.year }}
                 </span>
                 <v-row align="center" justify="end">
-                  <v-icon class="mr-1"> mdi-trash-can </v-icon>
+                  <v-icon class="mr-1" @click="deleteElement(element.id)">
+                    mdi-trash-can
+                  </v-icon>
                   <v-icon class="mr-1" @click="updateElement(element)">
                     mdi-pencil
                   </v-icon>
@@ -53,25 +55,33 @@
         </template>
       </v-timeline-item>
     </v-timeline>
+    <timeline-element-delete-dialog
+      v-if="openDeleteDialog"
+      :elementId="elementToDeleteId"
+      :openDialog="openDeleteDialog"
+    ></timeline-element-delete-dialog>
     <timeline-element-update-dialog
-      v-if="openDialog"
+      v-if="openUpdateDialog"
       :element="elementToUpdate"
-      :openDialog="openDialog"
-    />
+      :openDialog="openUpdateDialog"
+    ></timeline-element-update-dialog>
   </div>
 </template>
 
 <script>
-import TimelineElementUpdateDialog from "./TimelineElementUpdateDialog.vue";
+import TimelineElementDeleteDialog from "./TimelineElementDeleteDialog.vue";
+import TimelineElementUpdateDialog from "./TimelineElementFormUpdateDialog.vue";
 
 import { mapGetters } from "vuex";
 
 export default {
-  components: { TimelineElementUpdateDialog },
+  components: { TimelineElementDeleteDialog, TimelineElementUpdateDialog },
   name: "TimelineElementsList",
   data: () => ({
     elementToUpdate: null,
-    openDialog: false,
+    elementToDeleteId: "",
+    openUpdateDialog: false,
+    openDeleteDialog: false,
   }),
   methods: {
     isEvenNumber(num) {
@@ -79,10 +89,17 @@ export default {
     },
     updateElement(element) {
       this.elementToUpdate = { ...element };
-      this.openDialog = true;
+      this.openUpdateDialog = true;
     },
-    closeDialog() {
-      this.openDialog = false;
+    deleteElement(elementId) {
+      this.elementToDeleteId = elementId;
+      this.openDeleteDialog = true;
+    },
+    closeUpdateDialog() {
+      this.openUpdateDialog = false;
+    },
+    closeDeleteDialog() {
+      this.openDeleteDialog = false;
     },
   },
   computed: {

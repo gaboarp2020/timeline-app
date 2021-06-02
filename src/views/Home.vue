@@ -1,19 +1,19 @@
 <template>
   <main>
-    <timeline-element-add />
+    <timeline-element-form-add />
     <timeline-elements-list />
   </main>
 </template>
 
 <script>
-import TimelineElementAdd from "../components/TimelineElementAdd.vue";
+import TimelineElementFormAdd from "../components/TimelineElementFormAdd.vue";
 import TimelineElementsList from "../components/TimelineElementsList.vue";
 
 export default {
   name: "Home",
 
   components: {
-    TimelineElementAdd,
+    TimelineElementFormAdd,
     TimelineElementsList,
   },
 };

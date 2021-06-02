@@ -1,0 +1,12 @@
+{
+  "elements": [
+    {
+      "id": "af7217a6-0f57-4acc-945b-dbf9973f7424",
+      "color": "#70E4E4",
+      "description":
+        "Elemento extraido desde la db",
+      "title": "Async Element",
+      "year": "2020"
+    }
+  ]
+}

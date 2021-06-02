@@ -42,8 +42,13 @@ export default new Vuex.Store({
         (element) => element.id === elementToUpdate.id
       );
       state.elements.splice(key, 1);
-      console.log(state.elements);
       state.elements = [...state.elements, elementToUpdate];
+    },
+    DELETE_ELEMENT: (state, elementId) => {
+      const key = state.elements.findIndex(
+        (element) => element.id === elementId
+      );
+      state.elements.splice(key, 1);
     },
     incrementUnseenNotifitacionsCount: (state) => {
       state.unseenNotifitacionsCount++;
@@ -58,6 +63,9 @@ export default new Vuex.Store({
     },
     updateElementAction: ({ commit }, element) => {
       commit("UPDATE_ELEMENT", element);
+    },
+    deleteElementAction: ({ commit }, elementId) => {
+      commit("DELETE_ELEMENT", elementId);
     },
     incrementUnseenNotifitacionsCountAction: ({ commit }) => {
       commit("incrementUnseenNotifitacionsCount");

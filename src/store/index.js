@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     notificationCount: 0,
   },
   mutations: {
+    POPULATE_ELEMENTS: (state, elements) => {
+      state.elements = [...elements];
+    },
     ADD_ELEMENT: (state, element) => {
       state.elements = [...state.elements, element];
     },
@@ -53,6 +57,9 @@ export default new Vuex.Store({
     ADD_NOTIFICATION: (state, notification) => {
       state.notifications = [...state.notifications, notification];
     },
+    CLEAR_NOTIFICATIONS: (state) => {
+      state.notifications = [];
+    },
     NOTIFICATION_COUNT_INCREMENT: (state) => {
       state.notificationCount++;
     },
@@ -61,6 +68,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    populateElementsAction({ commit }) {
+      axios.get(URL).then((response) => {
+        // console.log(response.data, this)
+        commit("POPULATE_ELEMENTS", response.data);
+      });
+    },
     addElementAction: ({ commit }, element) => {
       commit("ADD_ELEMENT", element);
     },
@@ -73,6 +86,10 @@ export default new Vuex.Store({
     addNotificationAction: ({ commit }, notification) => {
       commit("ADD_NOTIFICATION", notification);
       commit("NOTIFICATION_COUNT_INCREMENT", notification);
+    },
+    clearNotificationAction: ({ commit }) => {
+      commit("CLEAR_NOTIFICATIONS");
+      commit("NOTIFICATION_COUNT_RESET");
     },
   },
   getters: {

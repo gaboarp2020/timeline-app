@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <div>
     <timeline-element-form-add />
     <timeline-elements-list />
-  </main>
+  </div>
 </template>
 
 <script>

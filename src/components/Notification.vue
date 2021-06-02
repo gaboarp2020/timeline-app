@@ -57,6 +57,11 @@ export default {
         : "mdi-check-circle";
     },
   },
+  watch: {
+    notification: function () {
+      this.createNotification();
+    },
+  },
   created() {
     this.createNotification();
   },

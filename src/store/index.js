@@ -30,8 +30,8 @@ export default new Vuex.Store({
         year: 2003,
       },
     ],
-    notifitacions: [],
-    unseenNotifitacionsCount: 0,
+    notifications: [],
+    notificationCount: 0,
   },
   mutations: {
     ADD_ELEMENT: (state, element) => {
@@ -50,11 +50,14 @@ export default new Vuex.Store({
       );
       state.elements.splice(key, 1);
     },
-    incrementUnseenNotifitacionsCount: (state) => {
-      state.unseenNotifitacionsCount++;
+    ADD_NOTIFICATION: (state, notification) => {
+      state.notifications = [...state.notifications, notification];
     },
-    resetUnseenNotifitacionsCount: (state) => {
-      state.unseenNotifitacionsCount = 0;
+    NOTIFICATION_COUNT_INCREMENT: (state) => {
+      state.notificationCount++;
+    },
+    NOTIFICATION_COUNT_RESET: (state) => {
+      state.notificationCount = 0;
     },
   },
   actions: {
@@ -67,11 +70,9 @@ export default new Vuex.Store({
     deleteElementAction: ({ commit }, elementId) => {
       commit("DELETE_ELEMENT", elementId);
     },
-    incrementUnseenNotifitacionsCountAction: ({ commit }) => {
-      commit("incrementUnseenNotifitacionsCount");
-    },
-    resetUnseenNotifitacionsCountAction: ({ commit }) => {
-      commit("resetUnseenNotifitacionsCount");
+    addNotificationAction: ({ commit }, notification) => {
+      commit("ADD_NOTIFICATION", notification);
+      commit("NOTIFICATION_COUNT_INCREMENT", notification);
     },
   },
   getters: {

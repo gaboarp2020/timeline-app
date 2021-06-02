@@ -3,11 +3,14 @@ const sendPayload = (callback, context, payload) => {
     context.isLoading = true;
     try {
       callback(payload);
-      //TODO: Notifications logic
-    } catch (error) {
-      console.log(error);
-    } finally {
       context.isLoading = false;
+
+      return true;
+    } catch (error) {
+      // console.log(error);
+      context.isLoading = false;
+
+      return false;
     }
   }
 };

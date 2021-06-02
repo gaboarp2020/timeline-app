@@ -95,7 +95,6 @@
 // @ts-nocheck
 import BaseDialog from "./BaseDialog.vue";
 import generateArrayOfYears from "./utils/generateArrayOfYears";
-import sendPayload from "./utils/sendPayload";
 
 import { v4 as uuidv4 } from "uuid";
 import { required, max, min } from "vee-validate/dist/rules";
@@ -105,7 +104,6 @@ import {
   ValidationProvider,
   setInteractionMode,
 } from "vee-validate";
-import { mapActions } from "vuex";
 
 setInteractionMode("eager");
 
@@ -136,10 +134,13 @@ export default {
       type: Object,
       default: null,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: (props) => ({
     dialog: false,
-    isLoading: false,
     isUpdate: false,
     newElement: {
       id: "",
@@ -152,6 +153,13 @@ export default {
   }),
 
   methods: {
+    addElement() {
+      this.newElement.id = uuidv4();
+      const payload = { ...this.newElement };
+      this.$emit("add", payload);
+
+      this.clear();
+    },
     clear() {
       this.newElement.year = "";
       this.newElement.title = "";
@@ -177,13 +185,7 @@ export default {
 
         return;
       }
-
-      this.newElement.id = uuidv4();
-      const payload = { ...this.newElement };
-
-      sendPayload(this.addElement, this, payload);
-
-      this.clear();
+      this.addElement();
     },
     update() {
       if (this.isUpdate) {
@@ -193,18 +195,12 @@ export default {
 
         if (!elementsAreEquals) {
           const payload = { ...this.newElement };
-          sendPayload(this.updateElement, this, payload);
+          this.$emit("update", payload);
         }
 
         this.$emit("close");
       }
     },
-    ...mapActions({
-      addElement: "addElementAction",
-      updateElement: "updateElementAction",
-      incrementUnseenNotifitacionsCount:
-        "incrementUnseenNotifitacionsCountActions",
-    }),
   },
   computed: {
     years: () => {

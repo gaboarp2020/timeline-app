@@ -1,8 +1,14 @@
 <template>
   <div>
-    <landing-page />
-    <steps-page />
-    <timeline-page />
+    <section id="landing-page">
+      <landing-page />
+    </section>
+    <section id="steps-page">
+      <steps-page />
+    </section>
+    <section id="timeline-page">
+      <timeline-page />
+    </section>
   </div>
 </template>
 

@@ -81,9 +81,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav__bar {
-  position: relative;
-}
 .notification__menu {
   position: absolute;
   top: 60px;

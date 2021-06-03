@@ -66,6 +66,14 @@
           </v-card>
         </template>
       </v-timeline-item>
+      <div
+        :class="[
+          'd-flex',
+          $vuetify.breakpoint.smAndDown ? 'justify-start' : 'justify-center',
+        ]"
+      >
+        <v-toolbar max-height="16" max-width="160"></v-toolbar>
+      </div>
     </v-timeline>
     <timeline-element-delete-dialog
       v-if="openDeleteDialog"

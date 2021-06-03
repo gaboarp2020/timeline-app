@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-app-bar color="white" class="nav__bar" elevate-on-scroll fixed>
+      <v-app-bar-nav-icon>
+        <v-img width="32" src="../assets/logo.svg"></v-img>
+      </v-app-bar-nav-icon>
       <v-toolbar-title>Timeline App</v-toolbar-title>
 
       <v-spacer></v-spacer>

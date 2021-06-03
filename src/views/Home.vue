@@ -1,20 +1,23 @@
 <template>
   <div>
-    <timeline-element-form-add />
-    <timeline-elements-list />
+    <landing-page />
+    <steps-page />
+    <timeline-page />
   </div>
 </template>
 
 <script>
-import TimelineElementFormAdd from "../components/TimelineElementFormAdd.vue";
-import TimelineElementsList from "../components/TimelineElementsList.vue";
+import LandingPage from "../layouts/LandingPage.vue";
+import StepsPage from "../layouts/StepsPage.vue";
+import TimelinePage from "../layouts/TimelinePage.vue";
 
 export default {
   name: "Home",
 
   components: {
-    TimelineElementFormAdd,
-    TimelineElementsList,
+    LandingPage,
+    StepsPage,
+    TimelinePage,
   },
 };
 </script>

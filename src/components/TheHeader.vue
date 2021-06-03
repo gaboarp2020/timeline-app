@@ -7,10 +7,10 @@
       <v-badge
         :content="notificationCount"
         :value="notificationCount"
-        color="blue"
+        color="red"
         overlap
       >
-        <v-icon @click="notificationMenu = !notificationMenu">
+        <v-icon color="secndary" @click="notificationMenu = !notificationMenu">
           mdi-bell
         </v-icon>
       </v-badge>
@@ -22,7 +22,13 @@
           width="320"
           tile
         >
-          <v-card-title class="text-h5">Notifications</v-card-title>
+          <v-card-title class="text-h5"
+            >Notifications
+            <v-spacer></v-spacer>
+            <v-icon right @click="notificationMenu = !notificationMenu">
+              mdi-close
+            </v-icon></v-card-title
+          >
           <v-list-item
             v-for="(notification, index) in notifications"
             :key="index"

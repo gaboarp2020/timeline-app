@@ -20,7 +20,7 @@
       <v-stepper-content step="1">
         <v-card class="mb-12" height="200px">
           <v-card-text class="text-h5"
-            >Create a new item on the timeline (for example, a historical event)
+            >Create a new Element on the Timeline (for example, a historical event)
             by clicking "Add a new Timeline Element" and filling in the
             form.</v-card-text
           >
@@ -32,7 +32,7 @@
       <v-stepper-content step="2">
         <v-card class="mb-12" height="200px">
           <v-card-text class="text-h5"
-            >Update any of the existing element in the time line by clicking on
+            >Update any of the existing Element in the Timeline by clicking on
             the pencil icon and filling in the form.</v-card-text
           >
         </v-card>

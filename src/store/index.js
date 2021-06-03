@@ -11,26 +11,26 @@ export default new Vuex.Store({
     elements: [
       {
         id: "987c332c-712e-47d4-b64f-de9f9dac10a9",
-        color: "#32C6C6",
+        color: "#54A8E6",
         description:
-          "El 9 de noviembre de 1989 se abrió el Muro de Berlín, que había dividido a la ciudad durante casi 30 años",
-        title: "Caída del Muro de Berlín",
+          "On November 9, 1989, the Berlin Wall was inaugurated, which had divided the city for almost 30 years",
+        title: "Fall of the Berlin wall ",
         year: 1989,
       },
       {
         id: "f3952c73-cbda-459b-8dd0-0e8992b78ced",
-        color: "#7170E4",
+        color: "#688BDE",
         description:
-          "Tras la consagración de España ante Países Bajos, este Mundial fue el primero jugado fuera de Europa en el que se proclamó campeón un equipo de dicho continente",
-        title: "Copa Mundial de la FIFA 2010",
+          "After the consecration of Spain against the Netherlands, this World Cup was the first played outside Europe in which a team from that continent was proclaimed champion",
+        title: "2010 FIFA World Cup",
         year: 2010,
       },
       {
         id: "4e0c4b46-4447-48ca-befa-696d4ff2dae3",
-        color: "#5DB7DFFF",
+        color: "#A08ADD",
         description:
-          "El 25 de julio de 1992 fueron inaugurados los Juegos Olímpicos de Barcelona",
-        title: "Juegos Olímpicos de Barcelona",
+          "On July 25, 1992, the Barcelona Olympic Games were inaugurated",
+        title: "Barcelona Olympic Games",
         year: 1992,
       },
     ],

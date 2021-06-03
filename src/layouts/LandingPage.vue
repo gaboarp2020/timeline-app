@@ -119,4 +119,11 @@ export default {
   right: 10px;
   z-index: 1;
 }
+
+// custom vuetify css
+.v-card__text,
+.v-card__title,
+.v-card__subtitle {
+  word-break: normal; /* maybe !important  */
+}
 </style>

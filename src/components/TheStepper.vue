@@ -19,9 +19,9 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-card class="mb-12" height="200px">
-          <v-card-text class="text-h5"
-            >Create a new Element on the Timeline (for example, a historical event)
-            by clicking "Add a new Timeline Element" and filling in the
+          <v-card-text class="text-h6"
+            >Add a new Element on the Timeline (e.g, a historical event) by
+            clicking "Add a new Timeline Element" and filling in the
             form.</v-card-text
           >
         </v-card>

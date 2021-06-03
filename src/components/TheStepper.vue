@@ -21,7 +21,7 @@
         <v-card class="mb-12" height="200px">
           <v-card-text class="text-h5"
             >Create a new item on the timeline (for example, a historical event)
-            by clicking "Add a new timeline item" and filling in the
+            by clicking "Add a new Timeline Element" and filling in the
             form.</v-card-text
           >
         </v-card>

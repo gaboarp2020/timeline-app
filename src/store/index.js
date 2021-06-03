@@ -4,31 +4,34 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+const URL = "http://localhost:3000";
+
 export default new Vuex.Store({
   state: {
     elements: [
       {
         id: "987c332c-712e-47d4-b64f-de9f9dac10a9",
-        color: "#00CDFFFF",
+        color: "#32C6C6",
         description:
-          "Esta es una prueba dude, quieras o no todo depende de esto.",
-        title: "Hola",
-        year: 2015,
+          "El 9 de noviembre de 1989 se abrió el Muro de Berlín, que había dividido a la ciudad durante casi 30 años",
+        title: "Caída del Muro de Berlín",
+        year: 1989,
       },
       {
         id: "f3952c73-cbda-459b-8dd0-0e8992b78ced",
-        color: "#CD12EEFF",
+        color: "#7170E4",
         description:
-          "Y esta otra prueba más interesante! A que si? Pues no tengo mas nada que decir.",
-        title: "Que hace?",
+          "Tras la consagración de España ante Países Bajos, este Mundial fue el primero jugado fuera de Europa en el que se proclamó campeón un equipo de dicho continente",
+        title: "Copa Mundial de la FIFA 2010",
         year: 2010,
       },
       {
         id: "4e0c4b46-4447-48ca-befa-696d4ff2dae3",
-        color: "#0FE66DFF",
-        description: "Viva el verde!!",
-        title: "Verde",
-        year: 2003,
+        color: "#5DB7DFFF",
+        description:
+          "El 25 de julio de 1992 fueron inaugurados los Juegos Olímpicos de Barcelona",
+        title: "Juegos Olímpicos de Barcelona",
+        year: 1992,
       },
     ],
     notifications: [],
@@ -68,10 +71,39 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    populateElementsAction({ commit }) {
-      axios.get(URL).then((response) => {
-        // console.log(response.data, this)
+    async populateElementsAction({ commit }) {
+      await axios.get(`${URL}/elements`).then((response) => {
         commit("POPULATE_ELEMENTS", response.data);
+      });
+    },
+    async asyncAddElementAction({ dispatch }, element) {
+      await axios.post(`${URL}/elements`, element).then((response) => {
+        if (response.status === 201) {
+          dispatch("populateElementsAction").catch((error) => {
+            console.log(error);
+          });
+        }
+      });
+    },
+    async asyncUpdateElementAction({ dispatch }, element) {
+      await axios
+        .put(`${URL}/elements/${element.id}`, element)
+        .then((response) => {
+          if (response.status === 200) {
+            dispatch("populateElementsAction").catch((error) => {
+              console.log(error);
+            });
+          }
+        });
+    },
+    async asyncDeleteElementAction({ dispatch }, elementId) {
+      console.log(elementId);
+      await axios.delete(`${URL}/elements/${elementId}`).then((response) => {
+        if (response.status === 200) {
+          dispatch("populateElementsAction").catch((error) => {
+            console.log(error);
+          });
+        }
       });
     },
     addElementAction: ({ commit }, element) => {

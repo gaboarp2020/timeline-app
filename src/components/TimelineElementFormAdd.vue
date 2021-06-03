@@ -50,12 +50,15 @@ export default {
     isLoading: false,
   }),
   methods: {
-    addElement(payload) {
-      const responseWithoutErrors = sendPayload(
+    async addElement(payload) {
+      const responseWithoutErrors = await sendPayload(
         this.addElementAction,
+        // this.asyncAddElementAction,
         this,
         payload
-      );
+      ).then((res) => {
+        return res.error;
+      });
 
       this.notification = generateNotification(
         responseWithoutErrors,
@@ -72,7 +75,7 @@ export default {
     closeAlert() {
       this.alert = false;
     },
-    ...mapActions(["addElementAction"], {
+    ...mapActions(["addElementAction", "asyncAddElementAction"], {
       incrementUnseenNotifitacionsCount:
         "incrementUnseenNotifitacionsCountActions",
     }),

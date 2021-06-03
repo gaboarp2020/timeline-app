@@ -16,7 +16,11 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col cols="12"><v-btn class="ml-3">Get started</v-btn></v-col>
+        <v-col cols="12">
+          <a href="#steps-page">
+            <v-btn class="ml-3">Get started</v-btn>
+          </a>
+        </v-col>
       </v-row>
     </v-container>
 

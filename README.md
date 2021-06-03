@@ -36,7 +36,7 @@ npm run lint
 
 ### Fake API
 
-In this project there are commented requests for axios. If you want to test them, you can run a fake API with json-server (remember to uncomment the aync methods). To do this, post the following command: 
+In this project there are commented requests with axios. If you want to test them, you can run a fake API with json-server (remember to uncomment the aync methods). To do this, post the following command: 
 ```
 json-server --watch src/db/db.json
 ```

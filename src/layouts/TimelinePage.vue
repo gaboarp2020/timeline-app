@@ -1,5 +1,5 @@
 <template>
-  <div class="my-16">
+  <div class="py-16">
     <timeline-element-form-add />
     <timeline-elements-list />
   </div>

@@ -1,16 +1,22 @@
 <template>
   <div class="landingpage__hero">
     <v-container class="mt-14">
-      <v-row class="d-flex justify-center">
-        <v-card max-width="500">
-          <v-card-title class="landingpage__title mb-3"
-            >Timeline App</v-card-title
-          >
-          <v-card-text class="landingpage__subtitle ml-2">
-            A timeline application where you can add, edit and delete items that
-            are displayed in chronological order
-          </v-card-text>
-        </v-card>
+      <v-row class="d-flex justify-center ma-auto" style="max-width: 800px">
+        <v-col cols="12">
+          <v-card elevation="0" max-width="500">
+            <v-card-title class="landingpage__title mb-3"
+              >TIMELINE</v-card-title
+            >
+            <v-card-subtitle class="landingpage__subtitle mb-3"
+              >APP</v-card-subtitle
+            >
+            <v-card-text class="landingpage__text ml-2">
+              A timeline application where you can add, edit and delete items
+              that are displayed in chronological order
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12"><v-btn class="ml-3">Get started</v-btn></v-col>
       </v-row>
     </v-container>
 
@@ -74,7 +80,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
 .landingpage__hero {
-  height: 600px;
+  height: 700px;
   position: relative;
 }
 .landingpage__wave {
@@ -84,13 +90,21 @@ export default {
 }
 .landingpage__title {
   color: #4876a1;
-  font-size: 4.8rem;
-  line-height: 4.9rem;
+  font-size: 3.8rem;
+  line-height: 4rem;
   letter-spacing: -0.03em;
   font-weight: 800;
   font-family: Ubuntu;
 }
 .landingpage__subtitle {
+  color: #4c7aa5;
+  font-size: 2.8rem;
+  line-height: 3rem;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  font-family: Ubuntu;
+}
+.landingpage__text {
   color: #8ba3b9;
   font-size: 1.8rem;
   line-height: 2rem;

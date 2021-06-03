@@ -67,12 +67,15 @@ export default {
       this.dialog = false;
       this.elementToUpdate = {};
     },
-    updateElement(payload) {
-      const responseWithoutErrors = sendPayload(
+    async updateElement(payload) {
+      const responseWithoutErrors = await sendPayload(
         this.updateElementAction,
+        // this.asyncUpdateElementAction,
         this,
         payload
-      );
+      ).then((res) => {
+        return res.error;
+      });
 
       this.notification = generateNotification(
         responseWithoutErrors,
@@ -86,7 +89,7 @@ export default {
         this.alert = false;
       }, 3000);
     },
-    ...mapActions(["updateElementAction"]),
+    ...mapActions(["updateElementAction", "asyncUpdateElementAction"]),
   },
   watch: {
     element: function (newVal) {

@@ -1,17 +1,16 @@
-const sendPayload = (callback, context, payload) => {
+const sendPayload = async (callback, context, payload = null) => {
+  let error = false;
   if (context && "isLoading" in context) {
     context.isLoading = true;
     try {
-      callback(payload);
+      await callback(payload);
+    } catch (e) {
+      console.log(e);
+      error = true;
+    } finally {
       context.isLoading = false;
-
-      return true;
-    } catch (error) {
-      // console.log(error);
-      context.isLoading = false;
-
-      return false;
     }
+    return { error };
   }
 };
 

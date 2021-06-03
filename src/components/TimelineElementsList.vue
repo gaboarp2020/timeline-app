@@ -1,10 +1,22 @@
 <template>
   <div>
-    <v-timeline :dense="$vuetify.breakpoint.smAndDown">
+    <template v-if="isLoading">
+      <v-container class="d-flex" style="height: 400px">
+        <v-progress-circular
+          :size="100"
+          :width="6"
+          class="ma-auto"
+          color="cyan"
+          indeterminate
+        ></v-progress-circular>
+      </v-container>
+    </template>
+    <v-timeline v-show="!isLoading" :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
         v-for="(element, index) in orderedElementsByYear"
         :key="index"
         :color="element.color"
+        :class="$vuetify.breakpoint.smAndDown ? 'mr-5' : ''"
         fill-dot
         large
       >
@@ -71,8 +83,9 @@
 <script>
 import TimelineElementDeleteDialog from "./TimelineElementDeleteDialog.vue";
 import TimelineElementUpdateDialog from "./TimelineElementFormUpdateDialog.vue";
+// import sendPayload from "./utils/sendPayload";
 
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: { TimelineElementDeleteDialog, TimelineElementUpdateDialog },
@@ -80,6 +93,7 @@ export default {
   data: () => ({
     elementToUpdate: null,
     elementToDeleteId: "",
+    isLoading: false,
     openUpdateDialog: false,
     openDeleteDialog: false,
   }),
@@ -101,11 +115,17 @@ export default {
     closeDeleteDialog() {
       this.openDeleteDialog = false;
     },
+    ...mapActions({
+      populateElements: "populateElementsAction",
+    }),
   },
   computed: {
     ...mapGetters({
       orderedElementsByYear: "getOrderedElementByYear",
     }),
+  },
+  created() {
+    // sendPayload(this.populateElements, this);
   },
 };
 </script>

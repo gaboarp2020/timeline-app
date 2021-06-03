@@ -57,12 +57,15 @@ export default {
     closeDialog() {
       this.dialog = false;
     },
-    deleteElement() {
-      const responseWithoutErrors = sendPayload(
+    async deleteElement() {
+      const responseWithoutErrors = await sendPayload(
         this.deleteElementAction,
+        // this.asyncDeleteElementAction,
         this,
         this.elementToDeleteId
-      );
+      ).then((res) => {
+        return res.error;
+      });
 
       this.notification = generateNotification(
         responseWithoutErrors,
@@ -77,7 +80,7 @@ export default {
       }, 3000);
     },
 
-    ...mapActions(["deleteElementAction"]),
+    ...mapActions(["deleteElementAction", "asyncDeleteElementAction"]),
   },
   watch: {
     elementId: function (newVal) {

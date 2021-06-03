@@ -1,16 +1,11 @@
-const generateNotification = (
-  responseWithoutError,
-  successContent,
-  errorContent
-) => {
-  if (!responseWithoutError) {
+const generateNotification = (error, successContent, errorContent) => {
+  if (error) {
     return {
       type: "error",
       content: errorContent,
       time: new Date().toLocaleTimeString(),
     };
   }
-
   return {
     type: "success",
     content: successContent,

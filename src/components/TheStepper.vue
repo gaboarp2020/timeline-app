@@ -37,6 +37,7 @@
           >
         </v-card>
 
+        <v-btn class="mr-3" @click="e1 = 1"> Back </v-btn>
         <v-btn color="primary" @click="e1 = 3"> Continue </v-btn>
       </v-stepper-content>
 
@@ -48,7 +49,10 @@
           </v-card-text>
         </v-card>
 
-        <v-btn color="primary" @click="e1 = 1"> Continue </v-btn>
+        <v-btn class="mr-3" @click="e1 = 2"> Back </v-btn>
+        <a href="#timeline-page">
+          <v-btn color="primary" @click="e1 = 1"> Continue </v-btn>
+        </a>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>

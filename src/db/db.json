@@ -2,11 +2,24 @@
   "elements": [
     {
       "id": "af7217a6-0f57-4acc-945b-dbf9973f7424",
-      "color": "#70E4E4",
-      "description":
-        "Elemento extraido desde la db",
+      "color": "#5AD7D3",
+      "description": "This is an async element extracted from a fake API REST",
       "title": "Async Element",
-      "year": "2020"
+      "year": 2021
+    },
+    {
+      "id": "48d5a08a-191d-430a-8b19-b06d811a5ed2",
+      "year": 2019,
+      "title": "Second async Element",
+      "description": "This is a second asyn element in the JSON database",
+      "color": "#8870E4"
+    },
+    {
+      "id": "31b5565b-c338-484a-83ef-1d3db43f84c0",
+      "year": 2018,
+      "title": "Another one",
+      "description": "This is another on",
+      "color": "#70A6E4"
     }
   ]
 }

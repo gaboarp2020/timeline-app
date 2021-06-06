@@ -12,7 +12,7 @@ Although Vue 3 has improved performance and better support for typescript, most 
 
 Being a fast project (prototype), it was ideal to have a UI framework based on components like Vuetify, so Vue 2 was chosen for this project.
 
-nota: El principal motivo de este proyecto es como resultado de una prueba técnica. Sientete libre de utilizarlo con cualquier propósito.
+note: The main reason for this project is as a result of a technical test. Feel free to use it for any purpose.
 
 ## Project setup
 ```
